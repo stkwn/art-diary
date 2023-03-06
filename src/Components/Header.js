@@ -1,31 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import logo from "../logo.png";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Header() {
-  const [user, setUser] = useState("");
+  const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
 
-  useEffect(() => {}, []);
+  const handleLogout = () => {
+    logout({
+      returnTo: window.location.origin,
+    });
+  };
+
+  const handleLogin = () => {
+    loginWithRedirect();
+  };
 
   return (
     <NavContainer className="section-center">
       <div className="logo__box">
         <img src={logo} alt="logo" />
       </div>
-      <form className="search__box" action="">
-        <input
-          type="text"
-          placeholder="Search drawing type of watercolor, creatative..."
-        />
-        <button>
-          <FaSearch />
+      {!isAuthenticated ? (
+        <button className="btn" onClick={handleLogin}>
+          login
         </button>
-      </form>
-      {!user ? (
-        <button className="btn">login</button>
       ) : (
-        <button className="btn">manager</button>
+        <div className="button__box">
+          <button className="btn mr">Manage My Artworks</button>
+          <button className="btn" onClick={handleLogout}>
+            logout
+          </button>
+        </div>
       )}
     </NavContainer>
   );
@@ -46,6 +52,9 @@ const NavContainer = styled.nav`
     }
   }
 
+  .mr {
+    margin-right: 2rem;
+  }
   .search__box {
     width: 100%;
     display: flex;
