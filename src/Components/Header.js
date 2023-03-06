@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import logo from "../logo.png";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
+import AuthenticationButton from '../auth/authentication-button';
 
 export default function Header() {
-  const [user, setUser] = useState("");
+  // const [user, setUser] = useState("");
 
   useEffect(() => {}, []);
 
@@ -22,11 +23,9 @@ export default function Header() {
           <FaSearch />
         </button>
       </form>
-      {!user ? (
-        <button className="btn">login</button>
-      ) : (
-        <button className="btn">manager</button>
-      )}
+        <div className="navbar-nav ml-auto">
+          <AuthenticationButton />
+        </div>
     </NavContainer>
   );
 }
