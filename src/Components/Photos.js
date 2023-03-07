@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaBox } from "react-icons/fa";
 import styled from "styled-components";
 
@@ -79,20 +79,34 @@ const photos = [
 ];
 
 export default function Photos() {
+  const [photos, setPhotos] = useState([]);
+
+  useEffect(() => {
+    fetch("https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev/items")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        return setPhotos(data.items);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
+  // console.log(photos);
   return (
     <Wrapper>
       <div className="section section-center">
         <div className="photos__box">
-          {photos.map((image, index) => (
-            <div className="photo__box">
-              <img
-                key={index}
-                src={image.url}
-                alt={image.name}
-                className="photo"
-              ></img>
-            </div>
-          ))}
+          {photos.length > 0 &&
+            photos.map((image) => (
+              <div className="photo__box">
+                <img
+                  key={image.itemId}
+                  src={image.attachementUrl}
+                  alt={image.itemName}
+                  className="photo"
+                ></img>
+              </div>
+            ))}
           {/* // return <img src={image.url} className="photo"></img>; */}
         </div>
       </div>

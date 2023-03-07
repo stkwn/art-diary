@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import logo from "../logo.png";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
-import AuthenticationButton from '../auth/authentication-button';
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   // const [user, setUser] = useState("");
@@ -22,9 +22,14 @@ export default function Header() {
         <button>
           <FaSearch />
         </button>
-      </form>
-        <div className="navbar-nav ml-auto">
-          <AuthenticationButton />
+      ) : (
+        <div className="button__box">
+          <Link to="/manage" className="btn mr">
+            Manage My Artworks
+          </Link>
+          <button className="btn" onClick={handleLogout}>
+            logout
+          </button>
         </div>
     </NavContainer>
   );

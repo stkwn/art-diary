@@ -1,19 +1,16 @@
-
-
-import Header from "./Components/Header";
-import Hero from "./Components/Hero";
-import Footer from "./Components/Footer";
-import Photos from "./Components/Photos";
-// import NavBar from "./Components/nav-bar";
+import Home from "./Pages/Home";
+import Manage from "./Pages/Manage";
+import Artwork from "./Pages/Artwork";
+import InserArtwork from "./Pages/InserArtwork";
+import { Route, Routes } from "react-router-dom";
 
 export default function App() {
   return (
-    <>
-      <Header />
-      {/* <NavBar /> */}
-      <Hero />
-      <Photos />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/manage" element={<Manage />}></Route>
+      <Route path="/manage/:id" element={<Artwork />}></Route>
+      <Route path="/manage/insert" element={<InserArtwork />}></Route>
+    </Routes>
   );
 }
