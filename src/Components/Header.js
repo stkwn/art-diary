@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import logo from "../logo.png";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
@@ -27,7 +28,9 @@ export default function Header() {
         </button>
       ) : (
         <div className="button__box">
-          <button className="btn mr">Manage My Artworks</button>
+          <Link to="/manage" className="btn mr">
+            Manage My Artworks
+          </Link>
           <button className="btn" onClick={handleLogout}>
             logout
           </button>
