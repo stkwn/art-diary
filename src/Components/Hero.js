@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import image01 from "../assets/image01.jpg";
 import image02 from "../assets/image02.jpg";
 import image03 from "../assets/image03.jpg";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function Hero() {
+export default async function Hero() {
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [userMetadata, setUserMetadata] = useState(null);
+ 
+  const domain = "dev-dt5w73xr4ennm0m8.us.auth0.com";
+
+  try {
+    const accessToken = await getAccessTokenSilently({
+      authorizationParams: {
+        audience: `https://${domain}/api/v2/`,
+        scope: "read:current_user",
+      },
+    });
+
+    const userDetailsByIdUrl = `https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev/items}`;
+
+    const metadataResponse = await fetch(userDetailsByIdUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const { user_metadata } = await metadataResponse.json();
+
+    setUserMetadata(user_metadata);
+  } catch (e) {
+    console.log(e.message);
+  }
+;
   return (
     <Wrapper>
       <div className="section section-center">
