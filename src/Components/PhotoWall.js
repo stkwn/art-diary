@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { useArtContext } from "../art_context";
 
@@ -25,7 +26,9 @@ export default function PhotoWall({ photos, manage }) {
                   </div>
                   {manage && (
                     <div className="button__box">
-                      <button className="btn">Edit</button>
+                      <Link to={`/manage/${image.itemId}`}>
+                        <button className="btn">Edit</button>
+                      </Link>
                       <button
                         className="btn"
                         onClick={() => value.deletePhoto(image.itemId)}
@@ -52,6 +55,7 @@ const Wrapper = styled.section`
   .photo__box {
     position: relative;
     height: 18rem;
+    margin-bottom: 2rem;
   }
 
   .photo__box:hover {
@@ -85,6 +89,7 @@ const Wrapper = styled.section`
   .button__box {
     display: flex;
     justify-content: space-around;
+    align-items: center;
   }
 
   @media screen and (min-width: 576px) {
