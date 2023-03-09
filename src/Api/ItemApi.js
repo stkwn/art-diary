@@ -2,7 +2,7 @@ import Axios from "axios";
 const endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
 
 export async function publicItem() {
-  const response = await Axios.get(`${endpoint}/manageItems`);
+  const response = await Axios.get(`${endpoint}/items`);
   const result = response.json;
   return result.items;
 }
@@ -39,7 +39,7 @@ export async function createItem(token, artist, itemname, description, type) {
   console.log(item);
   const itemId = item[0].itemId;
   const uploadUrl = await getUploadUrl(token, itemId);
-  await uploadFile(uploadUrl, file);
+  // await uploadFile(uploadUrl, file);
 }
 
 export async function updateItem(

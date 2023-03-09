@@ -1,19 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function PhotoWall({ photos }) {
-  // console.log(photos);
+import { useArtContext } from "../art_context";
+
+export default function PhotoWall({ photos, manage }) {
+  const value = useArtContext();
+
   return (
     <Wrapper>
       <div className="section section-center">
         <div className="photos__box">
           {photos.length > 0 &&
             photos.map((image) => {
-              console.log(image);
               return (
-                <div className="photo__box">
+                <div className="photo__box" key={image.itemId}>
                   <img
-                    key={image.itemId}
                     src={image.attachmentUrl}
                     alt={image.itemname}
                     className="photo"
@@ -22,6 +23,17 @@ export default function PhotoWall({ photos }) {
                     <span>{image.itemname}</span>
                     <span>{image.artist}</span>
                   </div>
+                  {manage && (
+                    <div className="button__box">
+                      <button className="btn">Edit</button>
+                      <button
+                        className="btn"
+                        onClick={() => value.deletePhoto(image.itemId)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -68,6 +80,11 @@ const Wrapper = styled.section`
   .photo {
     width: 100%;
     height: 100%;
+  }
+
+  .button__box {
+    display: flex;
+    justify-content: space-around;
   }
 
   @media screen and (min-width: 576px) {

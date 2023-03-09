@@ -1,31 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useArtContext } from "../art_context";
 import PhotoWall from "./PhotoWall";
 import { Link } from "react-router-dom";
 
 export default function PersonalPhotos() {
-  const [photos, setPhotos] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const token = process.env.REACT_APP_TOKEN;
-        const response = await fetch(
-          "https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev/manageItems",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const photos = await response.json();
-        console.log(photos);
-        setPhotos(photos.items);
-      } catch (e) {
-        console.error(e);
-      }
-    })();
-  }, []);
+  const { personalPhotos } = useArtContext();
 
   return (
     <Wrapper>
@@ -36,7 +16,7 @@ export default function PersonalPhotos() {
         <Link to="/" className="btn">
           Return Home
         </Link>
-        <PhotoWall photos={photos} />
+        <PhotoWall photos={personalPhotos} manage={true} />
       </div>
     </Wrapper>
   );

@@ -1,27 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function InsertPhoto() {
+  const initialState = {
+    itemName: "",
+    artist: "",
+    type: "",
+    isPublic: true,
+    description: "",
+  };
+  const [input, setInput] = useState(initialState);
+
+  const handleChange = () => {
+    
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Wrapper>
       <section className="section section-center">
         <h3>Insert a Photo</h3>
-        <form
-          action="https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev/manageItems"
-          method="post"
-        >
+        <form>
           <div className="form__box">
             <lable htmlFor="itemname">ArtWork Name</lable>
-            <input type="text" id="itemname" name="itemname"></input>
+            <input
+              type="text"
+              id="itemname"
+              name="itemname"
+              value={input.itemName}
+            ></input>
           </div>
           <div className="form__box">
             <lable htmlFor="artist">Artist Name</lable>
-            <input type="text" id="artist" name="artist"></input>
+            <input
+              type="text"
+              id="artist"
+              name="artist"
+              value={input.artist}
+            ></input>
           </div>
           <div className="form__box">
             <lable htmlFor="type">Type</lable>
-            <input type="text" id="type" name="type"></input>
+            <input type="text" id="type" name="type" value={input.type}></input>
+          </div>
+          <div className="form__box__check">
+            <lable htmlFor="isPublic">
+              Status: Is this artwork public or private{" "}
+            </lable>
+            <input
+              type="checkbox"
+              id="isPublic"
+              name="isPublic"
+              checked={input.isPublic}
+            ></input>
           </div>
           <div className="form__box">
             <lable htmlFor="description">Description</lable>
@@ -29,6 +65,7 @@ export default function InsertPhoto() {
               type="textarea"
               name="description"
               id="description"
+              value={input.description}
             ></textarea>
           </div>
           <div className="form__box">
@@ -36,7 +73,11 @@ export default function InsertPhoto() {
             <input name="attachement" id="attachment" type="file"></input>
           </div>
           <div className="btn__box">
-            <button className="btn" type="submit">
+            <button
+              className="btn"
+              type="submit"
+              onClick={(e) => handleSubmit(e)}
+            >
               Submit
             </button>
           </div>
@@ -56,6 +97,10 @@ const Wrapper = styled.div`
       padding: 1rem 2rem;
       display: flex;
       flex-direction: column;
+    }
+
+    .form__box__check {
+      padding: 1rem 2rem;
     }
 
     .btn__box {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaBox } from "react-icons/fa";
+import { useArtContext } from "../art_context";
 import PhotoWall from "./PhotoWall";
 
 const pics = [
@@ -18,7 +19,7 @@ const pics = [
 ];
 
 export default function Photos() {
-  const [photos, setPhotos] = useState(pics);
+  const { photos } = useArtContext();
 
   // useEffect(() => {
   //   fetch("https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev/items")
