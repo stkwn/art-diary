@@ -1,31 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { publicItem } from "../Api/ItemApi";
+import { Link } from "react-router-dom";
 
-export default function PhotoWall({ photos }) {
-  // console.log(photos);
+export default function PhotoWall({ }) {
+  const [photos, setPhotos] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await publicItem()
+      console.log("response", response)
+      setPhotos(response.items);
+
+
+
+    })();
+  }, []);
   return (
     <Wrapper>
       <div className="section section-center">
-        <div className="photos__box">
-          {photos.length > 0 &&
-            photos.map((image) => {
-              console.log(image);
-              return (
-                <div className="photo__box">
-                  <img
-                    key={image.itemId}
-                    src={image.attachmentUrl}
-                    alt={image.itemname}
-                    className="photo"
-                  ></img>
-                  <div className="photo__info">
-                    <span>{image.itemname}</span>
-                    <span>{image.artist}</span>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
+        <Link to="insert" className="btn">
+          Insert an artwork
+        </Link>
+        <Link to="/" className="btn">
+          Return Home
+        </Link>
+        <PhotoWall photos={photos} />
       </div>
     </Wrapper>
   );

@@ -1,48 +1,69 @@
-import React from "react";
+import React, { ChangeEvent, useState } from 'react';
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { createItem } from "../Api/ItemApi";
+import { uploadFile } from "../Api/ItemApi";
 
-export default function InsertPhoto() {
-  return (
+ export default function InsertPhoto(){
+    // Create a reference to the hidden file input element
+    const itemnameRef = React.createRef();
+    const artistRef = React.createRef();
+    const typeRef = React.createRef();
+    const descriptionRef = React.createRef();
+    const [image, setImage] = useState(null);
+    const handleFileChange = (e) => {
+      if (e.target.value) {
+        setImage(e.target.files[0]);
+        console.log('file', image)
+      }
+    };
+    
+    async function handleSubmit  (event){
+      event.preventDefault();
+      const artist = artistRef.current.value
+      const itemname = itemnameRef.current.value
+      const description = descriptionRef.current.value
+      const type = typeRef.current.value
+      const token = `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5qVlRUT2kyaDI3a0o2ZHh5N3dsbSJ9.eyJpc3MiOiJodHRwczovL2Rldi1kdDV3NzN4cjRlbm5tMG04LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJnb29nbGUtb2F1dGgyfDEwODU1MTYxNzE0OTYzNjM5NzI4MyIsImF1ZCI6WyJodHRwczovL3JibTd4NWU5Z2wuZXhlY3V0ZS1hcGkudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZGV2IiwiaHR0cHM6Ly9kZXYtZHQ1dzczeHI0ZW5ubTBtOC51cy5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNjc4MzI0MTAxLCJleHAiOjE2Nzg0MTA1MDEsImF6cCI6IlIxelhkUnVlb3dVb05pYzZHUHA0SVlqZGVVdFp6ZFNGIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.oOXL4iaFrWAWQvXzIrLRAUtpi3--hoIkX6XpaQp4Gt746tRlAoKWrsN1k3ve18729-W4HIfQ_eoB2AtVmNOvVuIAU0zcUgd0t5hmdRMoobW6YmcEUDmoGvdUhqGAM_7a8xz6SW5Z_kCgLDzbw2Ismb1rEW3hFI8AnOzkFSATrI2fIb82wH30c1ik6aWZiKXQ1VugIWJCD5aimZ5doziIujeUfdw5NjEqr3wDq7aboFxVWq6s13rdBwc1N3FKwY3jhGUFx8snE0KDHlIs3GhiqZQNCYbg5ptCvQf_Fe5acE-_vV3fOxYMr-wOZU1Phwd9jkH-vkla-zUqL4L35zi20w`;
+      await createItem(token, artist, itemname,description,type, image)
+
+    }
+    return (
     <Wrapper>
       <section className="section section-center">
         <h3>Insert a Photo</h3>
-        <form
-          action="https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev/manageItems"
-          method="post"
-        >
+        <form>
           <div className="form__box">
-            <lable htmlFor="itemname">ArtWork Name</lable>
-            <input type="text" id="itemname" name="itemname"></input>
+            <label htmlFor="itemname">ArtWork Name</label>
+            <input type="text" id="itemname" name="itemname" ref={itemnameRef}></input>
           </div>
           <div className="form__box">
-            <lable htmlFor="artist">Artist Name</lable>
-            <input type="text" id="artist" name="artist"></input>
+            <label htmlFor="artist">Artist Name</label>
+            <input type="text" id="artist" name="artist" ref={artistRef}></input>
           </div>
           <div className="form__box">
-            <lable htmlFor="type">Type</lable>
-            <input type="text" id="type" name="type"></input>
+            <label htmlFor="type">Type</label>
+            <input type="text" id="type" name="type" ref={typeRef} ></input>
           </div>
           <div className="form__box">
-            <lable htmlFor="description">Description</lable>
+            <label htmlFor="description">Description</label>
             <textarea
               type="textarea"
               name="description"
               id="description"
-            ></textarea>
+              ref={descriptionRef}></textarea>
           </div>
           <div className="form__box">
-            <lable htmlFor="attachment">Upload a photo of the artwork</lable>
-            <input name="attachement" id="attachment" type="file"></input>
+            <label htmlFor="attachment">Upload a photo of the artwork</label>
+            <input name="attachement" id="attachment" type="file" onChange={handleFileChange}></input>
           </div>
           <div className="btn__box">
-            <button className="btn" type="submit">
+            <button className="btn" type="submit" onClick={handleSubmit}>
               Submit
             </button>
           </div>
         </form>
       </section>
-    </Wrapper>
+   </Wrapper>
   );
 }
 

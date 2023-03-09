@@ -3,6 +3,7 @@ import Header from "../Components/Header";
 import Hero from "../Components/Hero";
 import Footer from "../Components/Footer";
 import InsertPhoto from "../Components/InsertPhoto";
+import { AddItemForm } from "../Components/InsertPhoto";
 
 export default function InserArtwork() {
   return (
