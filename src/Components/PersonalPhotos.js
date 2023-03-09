@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Photos from "./Photos";
+import PhotoWall from "./PhotoWall";
 import { Link } from "react-router-dom";
 
 export default function PersonalPhotos() {
@@ -18,10 +18,9 @@ export default function PersonalPhotos() {
             },
           }
         );
-        console.log(token);
         const photos = await response.json();
         console.log(photos);
-        setPhotos(photos);
+        setPhotos(photos.items);
       } catch (e) {
         console.error(e);
       }
@@ -37,7 +36,7 @@ export default function PersonalPhotos() {
         <Link to="/" className="btn">
           Return Home
         </Link>
-        <Photos />
+        <PhotoWall photos={photos} />
       </div>
     </Wrapper>
   );
