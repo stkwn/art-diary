@@ -1,11 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../logo.png";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
+  const {
+    isAuthenticated,
+    logout,
+    loginWithRedirect,
+    user,
+    isLoading,
+    getAccessTokenSilently,
+  } = useAuth0();
+
+  // const isAuthenticated = true;
+  const [login, setLogin] = useState(true);
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   const handleLogout = () => {
     logout({
@@ -13,16 +27,22 @@ export default function Header() {
     });
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     loginWithRedirect();
+    const token = await getAccessTokenSilently();
+    console.log(`token is: ${token}`);
+    // setLogin(true);
   };
 
   return (
     <NavContainer className="section-center">
       <div className="logo__box">
-        <img src={logo} alt="logo" />
+        <Link to="/">
+          <img src={logo} alt="logo" />
+        </Link>
       </div>
-      {!isAuthenticated ? (
+      {/* {!isAuthenticated ? ( */}
+      {!login ? (
         <button className="btn" onClick={handleLogin}>
           login
         </button>
@@ -31,6 +51,8 @@ export default function Header() {
           <Link to="/manage" className="btn mr">
             Manage My Artworks
           </Link>
+          {/* <span>Welcome, {user.name} !</span> */}
+          {/* {console.log(user)} */}
           <button className="btn" onClick={handleLogout}>
             logout
           </button>

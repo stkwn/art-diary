@@ -12,7 +12,8 @@ const Auth0ProviderWithHistory = ({ children }) => {
     history.push(
       appState && appState.targetUrl
         ? appState.targetUrl
-        : (window.location.href = "http://localhost:3000")
+        : (window.location.href =
+            "https://julie-test.d3pw6ogk003r9g.amplifyapp.com/")
     );
   };
 
@@ -20,7 +21,11 @@ const Auth0ProviderWithHistory = ({ children }) => {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={window.location.origin}
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+        audience: "https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/",
+        scope: "read:current_user update:current_user_metadata",
+      }}
       onRedirectCallback={onRedirectCallback}
     >
       {children}
