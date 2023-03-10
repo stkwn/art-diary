@@ -63,7 +63,7 @@ export const ArtProvider = ({ children }) => {
 
   useEffect(() => {
     fetchPhotos();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <ArtContext.Provider value={{ ...state, deletePhoto }}>
