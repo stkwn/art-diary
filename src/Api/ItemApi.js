@@ -38,7 +38,7 @@ export async function deleteItem(token,itemId) {
 }
 
 export async function getItem(token) {
-  console.log('token',token)
+  console.log('tokenhaha',token)
   try {
     const response = await Axios.get(`${endpoint}/manageItems`, {
       headers: {
@@ -47,6 +47,7 @@ export async function getItem(token) {
       },
     });
     const result = response.data;
+    console.log('result',result)
     return result.items;
   } catch (e) {
     console.error(e);
