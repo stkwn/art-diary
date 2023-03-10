@@ -9,10 +9,10 @@ import { ArtProvider } from "./art_context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <ArtProvider>
-      <Auth0ProviderWithHistory>
+   <Auth0ProviderWithHistory>
+      <ArtProvider>
         <App />
-      </Auth0ProviderWithHistory>
-    </ArtProvider>
+      </ArtProvider>
+    </Auth0ProviderWithHistory>
   </BrowserRouter>
 );
