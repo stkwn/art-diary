@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useReducer } from "react";
 import reducer from "./art_reducer";
 import { getItem } from "./Api/ItemApi";
-import { Token } from "./Api/ItemApi";
 import { PublicItem } from "./Api/ItemApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
 const initialState = {
-  user_token: Token(),
   photos: [],
   personalPhotos: [],
 };
