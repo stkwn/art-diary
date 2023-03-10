@@ -1,4 +1,6 @@
 import axios from "axios";
+import { act } from "react-dom/test-utils";
+import { deleteItem } from "./Api/ItemApi";
 const endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
 
 export default function art_reducer(state, action) {
@@ -11,19 +13,13 @@ export default function art_reducer(state, action) {
   }
 
   if (action.type === "delete_photo") {
-    const { user_token, photos, personalPhotos } = state;
+    const { photos, personalPhotos } = state;
     const newPhotos = photos.filter((item) => item.itemId !== action.payload);
     const newPersonalPhotos = personalPhotos.filter(
       (item) => item.itemId !== action.payload
     );
     (async () => {
-      await axios
-        .delete(`${endpoint}/manageItems/${action.payload}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user_token}`,
-          },
-        })
+      await deleteItem(action.payload)
         .then((response) => console.log("delete successful"))
         .catch((err) => console.log("There was an error", err));
     })();

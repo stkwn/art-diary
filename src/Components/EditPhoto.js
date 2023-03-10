@@ -7,12 +7,12 @@ import { updateItem } from "../Api/ItemApi";
 export default function EditPhoto(itemId) {
   const { personalPhotos } = useArtContext();
   const editPhoto = personalPhotos.find((item) => (item.id = itemId));
+  // const itemId= itemId
   const [artist, setArtist] = useState(editPhoto.artist);
   const [itemname, setItemname] = useState(editPhoto.itemname);
   const [description, setDescription] = useState(editPhoto.description);
   const [type, setType] = useState(editPhoto.type);
   const navigate = useNavigate();
-  const token = process.env.REACT_APP_TOKEN;
 
   const handleChange = (e) => {
     console.log(e.target.name);
@@ -33,12 +33,10 @@ export default function EditPhoto(itemId) {
   async function handleSubmit(event) {
     event.preventDefault();
     await updateItem(
-      token,
-      artist,
-      itemname,
+      itemId.itemId,
       description,
-      type,
-      editPhoto.img
+      true,
+      itemname
     ).then((response) => navigate("/manage"));
   }
 
