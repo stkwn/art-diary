@@ -13,7 +13,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       appState && appState.targetUrl
         ? appState.targetUrl
         : (window.location.href =
-            "https://julie-test.d3pw6ogk003r9g.amplifyapp.com/")
+            "https://julie-configure.d3pw6ogk003r9g.amplifyapp.com")
     );
   };
 

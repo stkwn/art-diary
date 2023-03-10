@@ -10,15 +10,9 @@ export default function Header() {
     logout,
     loginWithRedirect,
     user,
-    isLoading,
     getAccessTokenSilently,
   } = useAuth0();
 
-
-
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
 
   const handleLogout = () => {
     logout({
