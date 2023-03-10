@@ -14,8 +14,7 @@ export default function Header() {
     getAccessTokenSilently,
   } = useAuth0();
 
-  // const isAuthenticated = true;
-  const [login, setLogin] = useState(true);
+
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -41,8 +40,7 @@ export default function Header() {
           <img src={logo} alt="logo" />
         </Link>
       </div>
-      {/* {!isAuthenticated ? ( */}
-      {!login ? (
+      {!isAuthenticated ? (
         <button className="btn" onClick={handleLogin}>
           login
         </button>
@@ -51,8 +49,8 @@ export default function Header() {
           <Link to="/manage" className="btn mr">
             Manage My Artworks
           </Link>
-          {/* <span>Welcome, {user.name} !</span> */}
-          {/* {console.log(user)} */}
+          <span>Welcome, {user.name} !</span>
+          {console.log(user)}
           <button className="btn" onClick={handleLogout}>
             logout
           </button>
