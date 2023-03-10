@@ -3,6 +3,8 @@ import reducer from "./art_reducer";
 import { getItem } from "./Api/ItemApi";
 import { Token } from "./Api/ItemApi";
 import { PublicItem } from "./Api/ItemApi";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const initialState = {
   user_token: Token(),
@@ -10,15 +12,18 @@ const initialState = {
   personalPhotos: [],
 };
 
+
 const ArtContext = React.createContext();
 
 export const ArtProvider = ({ children }) => {
+  const {  isAuthenticated } = useAuth0();
+
   const [state, dispatch] = useReducer(reducer, initialState)
   const fetchPhotos = async () => {
     const response = await PublicItem();
     const photos = response;
     dispatch({ type: "get_photos", payload: photos });
-    if (state.user_token) {
+    if (isAuthenticated) {
       console.log("begin");
     const response = await getItem();
           dispatch({ type: "get_personal_photos", payload: response });
