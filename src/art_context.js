@@ -15,6 +15,7 @@ const ArtContext = React.createContext();
 
 export const ArtProvider = ({ children }) => {
   const {  getAccessTokenSilently ,isAuthenticated } = useAuth0();
+  console.log('isAuthenticated', isAuthenticated)
 
   const [state, dispatch] = useReducer(reducer, initialState)
   const fetchPhotos = async () => {
