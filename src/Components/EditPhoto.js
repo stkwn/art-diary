@@ -14,7 +14,7 @@ export default async function EditPhoto(itemId) {
   //   }})
 
   const { personalPhotos } = useArtContext();
-  const editPhoto = personalPhotos.find((item) => (item.itemId === itemId));
+  const editPhoto = personalPhotos.find((item) => (item.itemId === itemId.itemId));
   console.log('itemId', itemId)
   console.log('personalPhotos', personalPhotos)
   console.log('editPhoto', editPhoto)
