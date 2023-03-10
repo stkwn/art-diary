@@ -18,7 +18,12 @@ export const ArtProvider = ({ children }) => {
   console.log('isAuthenticated', isAuthenticated)
 
   const [state, dispatch] = useReducer(reducer, initialState)
+
   const fetchPhotos = async () => {
+    const response = await PublicItem();
+    const photos = response;
+    dispatch({ type: "get_photos", payload: photos });
+    
   if (isAuthenticated) {
       const token = await getAccessTokenSilently({
         authorizationParams: {
@@ -29,10 +34,6 @@ export const ArtProvider = ({ children }) => {
       console.log("begin");
     const response = await getItem(token);
           dispatch({ type: "get_personal_photos", payload: response });
-    }else{
-      const response = await PublicItem();
-      const photos = response;
-      dispatch({ type: "get_photos", payload: photos });
     }
   }
   //   const response = await axios.get(`${endpoint}/items`);
