@@ -19,9 +19,9 @@ export const ArtProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const fetchPhotos = async () => {
-    const response = await PublicItem();
-    const photos = response;
-    dispatch({ type: "get_photos", payload: photos });
+    // const response = await PublicItem();
+    // const photos = response;
+    // dispatch({ type: "get_photos", payload: photos });
     
   if (isAuthenticated) {
       const token = await getAccessTokenSilently({
