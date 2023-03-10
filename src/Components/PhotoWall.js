@@ -6,7 +6,8 @@ import { useArtContext } from "../art_context";
 
 export default function PhotoWall({ photos, manage }) {
   const value = useArtContext();
-
+  const { personalPhotos } = useArtContext();
+  console.log('personalPhotos from photo wall', personalPhotos)
   return (
     <Wrapper>
       <div className="section section-center">
