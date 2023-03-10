@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export default function PersonalPhotos() {
   const { personalPhotos } = useArtContext();
 
+  console.log("personalPhotos from personalphoto", personalPhotos)
   return (
     <Wrapper>
       <div className="section section-center">
