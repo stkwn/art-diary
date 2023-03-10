@@ -11,7 +11,7 @@ export default function Header() {
     loginWithRedirect,
     user,
     getAccessTokenSilently,
-  } = useAuth0();
+  } = new useAuth0();
 
 
   const handleLogout = () => {

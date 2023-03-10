@@ -16,17 +16,24 @@ const initialState = {
 const ArtContext = React.createContext();
 
 export const ArtProvider = ({ children }) => {
-  const {  isAuthenticated } = useAuth0();
+  const {  getAccessTokenSilently ,isAuthenticated } = useAuth0();
 
   const [state, dispatch] = useReducer(reducer, initialState)
   const fetchPhotos = async () => {
-    const response = await PublicItem();
-    const photos = response;
-    dispatch({ type: "get_photos", payload: photos });
-    if (isAuthenticated) {
+  if (isAuthenticated) {
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: 'https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev', // Value in Identifier field for the API being called.
+          scope: 'read:posts', // Scope that exists for the API being called. You can create these through the Auth0 Management API or through the Auth0 Dashboard in the Permissions view of your API.
+        }})
+
       console.log("begin");
-    const response = await getItem();
+    const response = await getItem(token);
           dispatch({ type: "get_personal_photos", payload: response });
+    }else{
+      const response = await PublicItem();
+      const photos = response;
+      dispatch({ type: "get_photos", payload: photos });
     }
   }
   //   const response = await axios.get(`${endpoint}/items`);
@@ -46,10 +53,13 @@ export const ArtProvider = ({ children }) => {
   //   }
   // };
 
-  const deletePhoto = (itemId) => {
+  const deletePhoto = (itemId) => {    
+    if (isAuthenticated) {
+
+      console.log("begin");
 
     dispatch({ type: "delete_photo", payload: itemId });
-  };
+  }};
 
   useEffect(() => {
     fetchPhotos();

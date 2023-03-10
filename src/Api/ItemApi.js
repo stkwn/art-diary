@@ -38,8 +38,7 @@ export async function deleteItem(itemId) {
   }
 }
 
-export async function getItem() {
-  const token=await Token()
+export async function getItem(token) {
   console.log('token',token)
   try {
     const response = await Axios.get(`${endpoint}/manageItems`, {
