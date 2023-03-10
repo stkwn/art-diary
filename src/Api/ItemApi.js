@@ -53,7 +53,7 @@ export async function createItem(
       itemname: itemname,
       description: description,
       type: type,
-      public: false,
+      public: true,
     };
     console.log(JSON.stringify(newItem));
     console.log("creating Item");
