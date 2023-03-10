@@ -6,56 +6,56 @@ import { updateItem } from "../Api/ItemApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default async function EditPhoto(itemId) {
-  // const {  getAccessTokenSilently} = useAuth0();
-  // const token = await getAccessTokenSilently({
-  //   authorizationParams: {
-  //     audience: 'https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev', // Value in Identifier field for the API being called.
-  //     scope: 'read:posts', // Scope that exists for the API being called. You can create these through the Auth0 Management API or through the Auth0 Dashboard in the Permissions view of your API.
-  //   }})
+  const {  getAccessTokenSilently} = useAuth0();
+  const token = await getAccessTokenSilently({
+    authorizationParams: {
+      audience: 'https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev', // Value in Identifier field for the API being called.
+      scope: 'read:posts', // Scope that exists for the API being called. You can create these through the Auth0 Management API or through the Auth0 Dashboard in the Permissions view of your API.
+    }})
 
   const { personalPhotos } = useArtContext();
   const editPhoto = personalPhotos.find((item) => (item.itemId === itemId.itemId));
   console.log('itemId', itemId)
   console.log('personalPhotos', personalPhotos)
   console.log('editPhoto', editPhoto)
-  // const [artist, setArtist] = useState(editPhoto.artist);
-  // const [itemname, setItemname] = useState(editPhoto.itemname);
-  // const [description, setDescription] = useState(editPhoto.description);
-  // const [type, setType] = useState(editPhoto.type);
-  // const navigate = useNavigate();
+  const [artist, setArtist] = useState(editPhoto.artist);
+  const [itemname, setItemname] = useState(editPhoto.itemname);
+  const [description, setDescription] = useState(editPhoto.description);
+  const [type, setType] = useState(editPhoto.type);
+  const navigate = useNavigate();
 
-  // const handleChange = (e) => {
-  //   console.log(e.target.name);
-  //   switch (e.target.name) {
-  //     case "itemname":
-  //       return setItemname(e.target.value);
-  //     case "artist":
-  //       return setArtist(e.target.value);
-  //     case "type":
-  //       return setType(e.target.value);
-  //     case "description":
-  //       return setDescription(e.target.value);
-  //     default:
-  //       return;
-  //   }
-  // };
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    switch (e.target.name) {
+      case "itemname":
+        return setItemname(e.target.value);
+      case "artist":
+        return setArtist(e.target.value);
+      case "type":
+        return setType(e.target.value);
+      case "description":
+        return setDescription(e.target.value);
+      default:
+        return;
+    }
+  };
 
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-  //   await updateItem(
-  //     token,
-  //     itemId.itemId,
-  //     description,
-  //     true,
-  //     itemname
-  //   ).then((response) => navigate("/manage"));
-  // }
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await updateItem(
+      token,
+      itemId.itemId,
+      description,
+      true,
+      itemname
+    ).then((response) => navigate("/manage"));
+  }
 
   return (
     <Wrapper>
       <section className="section section-center">
         <h3>Update a Photo</h3>
-        {/* <div className="edit__box">
+        <div className="edit__box">
           <div className="image__box">
             <img src={editPhoto.attachmentUrl} alt={editPhoto.itemname}></img>
           </div>
@@ -112,7 +112,7 @@ export default async function EditPhoto(itemId) {
               </div>
             </form>
           </div>
-        </div> */}
+        </div>
       </section>
     </Wrapper>
   );
