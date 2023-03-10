@@ -24,7 +24,7 @@ export async function PublicItem() {
 }
 
 export async function deleteItem(itemId) {
-  const token=Token()
+  const token= await Token()
   try {
     await Axios.delete(`${endpoint}/manageItems/${itemId}`, {
       headers: {
@@ -38,7 +38,7 @@ export async function deleteItem(itemId) {
 }
 
 export async function getItem() {
-  const token=Token()
+  const token=await Token()
   try {
     const response = await Axios.get(`${endpoint}/manageItems`, {
       headers: {
@@ -60,7 +60,7 @@ export async function createItem(
   type,
   file
 ) {
-  const token=Token()
+  const token=await Token()
   try {
     const newItem = {
       artist: artist,
@@ -98,7 +98,7 @@ export async function updateItem(
   ifPublic,
   itemname
 ) {
-  const token=Token()
+  const token= await Token()
   try {
     const updateRequest = {
       description: description,
