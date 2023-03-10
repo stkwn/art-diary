@@ -101,7 +101,7 @@ export async function updateItem(
   ifPublic,
   itemname
 ) {
-
+  console.log("I am inside update function")
   try {
     const updateRequest = {
       description: description,

@@ -34,9 +34,7 @@ export default function InsertPhoto() {
         scope: 'read:posts', // Scope that exists for the API being called. You can create these through the Auth0 Management API or through the Auth0 Dashboard in the Permissions view of your API.
       }})
 
-      console.log("begin");
-    const response = await getItem(token);
-    console.log('getItem', response)
+
     const artist = artistRef.current.value;
     const itemname = itemnameRef.current.value;
     const description = descriptionRef.current.value;

@@ -15,7 +15,6 @@ const ArtContext = React.createContext();
 
 export const ArtProvider = ({ children }) => {
   const {  getAccessTokenSilently ,isAuthenticated } = useAuth0();
-  console.log('isAuthenticated', isAuthenticated)
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -30,8 +29,6 @@ export const ArtProvider = ({ children }) => {
           audience: 'https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev', // Value in Identifier field for the API being called.
           scope: 'read:posts', // Scope that exists for the API being called. You can create these through the Auth0 Management API or through the Auth0 Dashboard in the Permissions view of your API.
         }})
-
-      console.log("begin");
     const response = await getItem(token);
           dispatch({ type: "get_personal_photos", payload: response });
     }
