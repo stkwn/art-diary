@@ -1,8 +1,5 @@
-import axios from "axios";
-import { act } from "react-dom/test-utils";
-import { deleteItem } from "./Api/ItemApi";
-const endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
 
+import { deleteItem } from "./Api/ItemApi";
 export default function art_reducer(state, action) {
   if (action.type === "get_photos") {
     return { ...state, photos: [...action.payload] };

@@ -2,7 +2,7 @@ import Axios from "axios";
 import { useAuth0 } from '@auth0/auth0-react';
 const endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
 
-async function Token(){
+export async function Token(){
   const { getAccessTokenSilently } = useAuth0();
   const token = await getAccessTokenSilently({
   authorizationParams: {
@@ -16,7 +16,7 @@ async function Token(){
 export async function PublicItem() {
   try {
     const response = await Axios.get(`${endpoint}/items`);
-    const result = response.json;
+    const result = response.data;
     return result.items;
   } catch (e) {
     console.error(e);
