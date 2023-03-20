@@ -25,6 +25,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
         redirect_uri: "https://julie-configure.d3pw6ogk003r9g.amplifyapp.com",
         audience: "https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev",
         scope: "read:current_user update:current_user_metadata",
+        cacheLocation: 'localstorage',
       }}
       onRedirectCallback={onRedirectCallback}
     >
