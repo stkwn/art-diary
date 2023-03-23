@@ -38,7 +38,7 @@ export async function deleteItem(itemId) {
 }
 
 export async function getItem() {
-  const token = await Token()
+  const token= await Token()
   console.log('token in getItem', token)
   try {
     const response = await Axios.get(`${api_backend_endpoint}/manageItems`, {

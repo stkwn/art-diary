@@ -13,7 +13,7 @@ const initialState = {
 
 const ArtContext = React.createContext();
 
-export const  ArtProvider = ({ children }) => {
+export const ArtProvider = ({ children }) => {
   const { isAuthenticated } = useAuth0();
 
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -59,11 +59,8 @@ export const  ArtProvider = ({ children }) => {
   }};
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchPhotos();
-  };
-  fetchData();
- }, [isAuthenticated]);
+    fetchPhotos();
+  }, [isAuthenticated]);
 
   return (
     <ArtContext.Provider value={{ ...state, deletePhoto }}>
