@@ -10,7 +10,7 @@ import { getItem } from "../Api/ItemApi";
 
 
 export default function InsertPhoto() {
-  const {  getAccessTokenSilently} = useAuth0();
+  // const {  getAccessTokenSilently} = useAuth0();
 
   const itemnameRef = React.createRef();
   const artistRef = React.createRef();
@@ -28,11 +28,11 @@ export default function InsertPhoto() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const token = await getAccessTokenSilently({
-      authorizationParams: {
-        audience: 'https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev', // Value in Identifier field for the API being called.
-        scope: 'read:posts', // Scope that exists for the API being called. You can create these through the Auth0 Management API or through the Auth0 Dashboard in the Permissions view of your API.
-      }})
+    // const token = await getAccessTokenSilently({
+    //   authorizationParams: {
+    //     audience: 'https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev', // Value in Identifier field for the API being called.
+    //     scope: 'read:posts', // Scope that exists for the API being called. You can create these through the Auth0 Management API or through the Auth0 Dashboard in the Permissions view of your API.
+    //   }})
 
 
     const artist = artistRef.current.value;
@@ -40,7 +40,7 @@ export default function InsertPhoto() {
     const description = descriptionRef.current.value;
     const type = typeRef.current.value;
     // const token = `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5qVlRUT2kyaDI3a0o2ZHh5N3dsbSJ9.eyJpc3MiOiJodHRwczovL2Rldi1kdDV3NzN4cjRlbm5tMG04LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJnb29nbGUtb2F1dGgyfDEwODU1MTYxNzE0OTYzNjM5NzI4MyIsImF1ZCI6WyJodHRwczovL3JibTd4NWU5Z2wuZXhlY3V0ZS1hcGkudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vZGV2IiwiaHR0cHM6Ly9kZXYtZHQ1dzczeHI0ZW5ubTBtOC51cy5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNjc4MzI0MTAxLCJleHAiOjE2Nzg0MTA1MDEsImF6cCI6IlIxelhkUnVlb3dVb05pYzZHUHA0SVlqZGVVdFp6ZFNGIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.oOXL4iaFrWAWQvXzIrLRAUtpi3--hoIkX6XpaQp4Gt746tRlAoKWrsN1k3ve18729-W4HIfQ_eoB2AtVmNOvVuIAU0zcUgd0t5hmdRMoobW6YmcEUDmoGvdUhqGAM_7a8xz6SW5Z_kCgLDzbw2Ismb1rEW3hFI8AnOzkFSATrI2fIb82wH30c1ik6aWZiKXQ1VugIWJCD5aimZ5doziIujeUfdw5NjEqr3wDq7aboFxVWq6s13rdBwc1N3FKwY3jhGUFx8snE0KDHlIs3GhiqZQNCYbg5ptCvQf_Fe5acE-_vV3fOxYMr-wOZU1Phwd9jkH-vkla-zUqL4L35zi20w`;
-    await createItem(token, artist, itemname, description, type, image);
+    await createItem(artist, itemname, description, type, image);
     navigate("/manage");
   }
 
