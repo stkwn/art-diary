@@ -25,7 +25,7 @@ export async function PublicItem() {
 
 export async function deleteItem(itemId) {
   try {
-    const token= Token()
+    const token= await Token()
     await Axios.delete(`${api_backend_endpoint}/manageItems/${itemId}`, {
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export async function deleteItem(itemId) {
 }
 
 export async function getItem() {
-  const token= Token()
+  const token= await Token()
   try {
     const response = await Axios.get(`${api_backend_endpoint}/manageItems`, {
       headers: {
@@ -63,7 +63,7 @@ export async function createItem(
 ) {
 
   try {
-    const token= Token()
+    const token= await Token()
     const newItem = {
       artist: artist,
       itemname: itemname,
@@ -102,7 +102,7 @@ export async function updateItem(
 ) {
   console.log("I am inside update function")
   try {
-    const token= Token()
+    const token= await Token()
     const updateRequest = {
       description: description,
       public: ifPublic,
