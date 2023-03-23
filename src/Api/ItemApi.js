@@ -1,8 +1,8 @@
 import Axios from "axios";
 import { useAuth0 } from '@auth0/auth0-react';
-const api_backend_endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
+const endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
 
- async function Token(){
+export async function Token(){
   const { getAccessTokenSilently } = useAuth0();
   const token = await getAccessTokenSilently({
   authorizationParams: {
@@ -15,7 +15,7 @@ const api_backend_endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
 
 export async function PublicItem() {
   try {
-    const response = await Axios.get(`${api_backend_endpoint}/items`);
+    const response = await Axios.get(`${endpoint}/items`);
     const result = response.data;
     return result.items;
   } catch (e) {
@@ -23,10 +23,10 @@ export async function PublicItem() {
   }
 }
 
-export async function deleteItem(itemId) {
+export async function deleteItem(token,itemId) {
+  console.log('token',token)
   try {
-    const token= Token()
-    await Axios.delete(`${api_backend_endpoint}/manageItems/${itemId}`, {
+    await Axios.delete(`${endpoint}/manageItems/${itemId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -37,10 +37,10 @@ export async function deleteItem(itemId) {
   }
 }
 
-export async function getItem() {
-  const token= Token()
+export async function getItem(token) {
+  console.log('tokenhaha',token)
   try {
-    const response = await Axios.get(`${api_backend_endpoint}/manageItems`, {
+    const response = await Axios.get(`${endpoint}/manageItems`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -55,6 +55,7 @@ export async function getItem() {
 }
 
 export async function createItem(
+  token,
   artist,
   itemname,
   description,
@@ -63,7 +64,6 @@ export async function createItem(
 ) {
 
   try {
-    const token= Token()
     const newItem = {
       artist: artist,
       itemname: itemname,
@@ -74,7 +74,7 @@ export async function createItem(
     console.log(JSON.stringify(newItem));
     console.log("creating Item");
     const response = await Axios.post(
-      `${api_backend_endpoint}/manageItems`,
+      `${endpoint}/manageItems`,
       JSON.stringify(newItem),
       {
         headers: {
@@ -86,7 +86,7 @@ export async function createItem(
     const item = response.data.item;
     console.log(item);
     const itemId = item.itemId;
-    const uploadUrl = await getUploadUrl(token,itemId);
+    const uploadUrl = await getUploadUrl(token, itemId);
     console.log(uploadUrl);
     uploadFile(uploadUrl, file);
   } catch (e) {
@@ -95,6 +95,7 @@ export async function createItem(
 }
 
 export async function updateItem(
+  token,
   itemId,
   description,
   ifPublic,
@@ -102,14 +103,13 @@ export async function updateItem(
 ) {
   console.log("I am inside update function")
   try {
-    const token= Token()
     const updateRequest = {
       description: description,
       public: ifPublic,
       itemname: itemname,
     };
     await Axios.patch(
-      `${api_backend_endpoint}/manageItems/${itemId}`,
+      `${endpoint}/manageItems/${itemId}`,
       JSON.stringify(updateRequest),
       {
         headers: {
@@ -125,7 +125,7 @@ export async function updateItem(
 
 async function getUploadUrl(token,itemId) {
   const response = await Axios.post(
-    `${api_backend_endpoint}/manageItems/${itemId}/attachment`,
+    `${endpoint}/manageItems/${itemId}/attachment`,
     "",
     {
       headers: {
