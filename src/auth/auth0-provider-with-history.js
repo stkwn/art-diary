@@ -26,6 +26,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
         redirect_uri: api_frontend_endpoint,
         audience: api_backend_endpoint,
         scope: "read:current_user update:current_user_metadata",
+        userRefreshTokens:true,
         cacheLocation: 'localstorage',
       }}
       onRedirectCallback={onRedirectCallback}
