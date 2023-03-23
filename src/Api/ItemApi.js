@@ -40,6 +40,7 @@ export async function deleteItem(itemId) {
 }
 
 export async function getItem() {
+  console.log('I am inside getitem')
   const token = await Token()
   console.log('token in getItem', token)
   try {
