@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useArtContext } from "../art_context";
 import { updateItem } from "../Api/ItemApi";
 import { useAuth0 } from "@auth0/auth0-react";
-import ItemApi from "../Api/ItemApi";
+import ItemApi from "./Api/ItemApi";
 
 
 export default function EditPhoto(itemId) {
