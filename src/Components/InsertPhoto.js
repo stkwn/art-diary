@@ -5,7 +5,7 @@ import { uploadFile } from "../Api/ItemApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getItem } from "../Api/ItemApi";
-import ItemApi from "./Api/ItemApi";
+import ItemApi from "../Api/ItemApi";
 
 
 
