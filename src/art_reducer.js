@@ -1,7 +1,6 @@
 
 import { deleteItem } from "./Api/ItemApi";
 import { Token } from "./Api/ItemApi";
-import ItemApi from "./Api/ItemApi";
 export default function art_reducer(state, action) {
   if (action.type === "get_photos") {
     return { ...state, photos: [...action.payload] };
@@ -18,8 +17,9 @@ export default function art_reducer(state, action) {
       (item) => item.itemId !== action.payload
     );
     (async () => {
-      
-      await ItemApi.deleteItem(action.payload)
+      const token=await Token()
+      console.log('start deleting')
+      await deleteItem(token,action.payload)
         .then((response) => console.log("delete successful"))
         .catch((err) => console.log("There was an error", err));
     })();
