@@ -13,7 +13,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       appState && appState.targetUrl
         ? appState.targetUrl
         : (window.location.href =
-            "https://julie-dev.d3pw6ogk003r9g.amplifyapp.com/")
+            "https://julie-dev.d3pw6ogk003r9g.amplifyapp.com")
     );
   };
 
@@ -22,7 +22,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       domain={domain}
       clientId={clientId}
       authorizationParams={{
-        redirect_uri: "https://julie-dev.d3pw6ogk003r9g.amplifyapp.com/",
+        redirect_uri: "https://julie-dev.d3pw6ogk003r9g.amplifyapp.com",
         audience: "https://rbm7x5e9gl.execute-api.us-east-1.amazonaws.com/dev",
         scope: "read:current_user update:current_user_metadata",
         userRefreshTokens:true,
