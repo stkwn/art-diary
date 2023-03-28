@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useArtContext } from "../art_context";
-import { updateItem } from "../Api/ItemApi";
-import { useAuth0 } from "@auth0/auth0-react";
+import ItemApi from "../Api/ItemApi";
 // import ItemApi from "../Api/ItemApi";
 
 export default function EditPhoto(itemId) {
 
 
   const { personalPhotos } = useArtContext();
+  const {updateItem} = ItemApi();
   const editPhoto = personalPhotos.find((item) => (item.itemId === itemId.itemId));
   console.log('itemId', itemId)
   console.log('personalPhotos', personalPhotos)
@@ -19,7 +19,7 @@ export default function EditPhoto(itemId) {
   const [description, setDescription] = useState(editPhoto.description);
   const [type, setType] = useState(editPhoto.type);
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     console.log(e.target.name);
     switch (e.target.name) {

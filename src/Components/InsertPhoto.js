@@ -5,13 +5,13 @@ import { uploadFile } from "../Api/ItemApi";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getItem } from "../Api/ItemApi";
-// import ItemApi from "../Api/ItemApi";
+import ItemApi from "../Api/ItemApi";
 
 
 
 
 export default function InsertPhoto() {
-
+  const {createItem} = ItemApi()
   const itemnameRef = React.createRef();
   const artistRef = React.createRef();
   const typeRef = React.createRef();

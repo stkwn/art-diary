@@ -3,6 +3,7 @@ import reducer from "./art_reducer";
 import { getItem } from "./Api/ItemApi";
 import { PublicItem } from "./Api/ItemApi";
 import { useAuth0 } from "@auth0/auth0-react";
+import ItemApi from "./Api/ItemApi";
 
 
 const initialState = {
@@ -17,7 +18,7 @@ export const ArtProvider = ({ children }) => {
   const { isAuthenticated } = useAuth0();
 
   const [state, dispatch] = useReducer(reducer, initialState)
-
+  const { getItem } = ItemApi()
   const fetchPhotos = async () => {
     // const response = await PublicItem();
     // const photos = response;

@@ -1,7 +1,8 @@
 
 import { deleteItem } from "./Api/ItemApi";
-import { Token } from "./Api/ItemApi";
+import ItemApi from "./Api/ItemApi";
 export default function art_reducer(state, action) {
+  const { deleteItem } = ItemApi 
   if (action.type === "get_photos") {
     return { ...state, photos: [...action.payload] };
   }
