@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 const endpoint = process.env.REACT_APP_APIGATEWAY_ENDPOINT;
 
 
-export default function ItemApi() {
+export  function ItemApi() {
   async function Token(){
     const { getAccessTokenSilently } = useAuth0();
     const token = await getAccessTokenSilently({
