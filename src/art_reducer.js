@@ -1,8 +1,7 @@
 
-import { deleteItem } from "./Api/ItemApi";
 import ItemApi from "./Api/ItemApi";
 export default function art_reducer(state, action) {
-  const { deleteItem } = ItemApi 
+
   if (action.type === "get_photos") {
     return { ...state, photos: [...action.payload] };
   }
@@ -19,7 +18,7 @@ export default function art_reducer(state, action) {
     );
     (async () => {
       console.log('start deleting')
-      await deleteItem(action.payload)
+      await ItemApi.deleteItem(action.payload)
         .then((response) => console.log("delete successful"))
         .catch((err) => console.log("There was an error", err));
     })();

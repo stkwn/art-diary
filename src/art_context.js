@@ -18,14 +18,13 @@ export const ArtProvider = ({ children }) => {
   const { isAuthenticated } = useAuth0();
 
   const [state, dispatch] = useReducer(reducer, initialState)
-  const { getItem } = ItemApi()
   const fetchPhotos = async () => {
     // const response = await PublicItem();
     // const photos = response;
     // dispatch({ type: "get_photos", payload: photos });
     
   if (isAuthenticated) {
-    const response = await getItem();
+    const response = await ItemApi.getItem();
           dispatch({ type: "get_personal_photos", payload: response });
     }
   }

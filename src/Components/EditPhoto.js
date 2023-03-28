@@ -38,7 +38,7 @@ export default function EditPhoto(itemId) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await updateItem(
+    await ItemApi.updateItem(
       itemId.itemId,
       description,
       true,
