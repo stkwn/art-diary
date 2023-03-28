@@ -17,9 +17,8 @@ export default function art_reducer(state, action) {
       (item) => item.itemId !== action.payload
     );
     (async () => {
-      const token=await Token()
       console.log('start deleting')
-      await deleteItem(token,action.payload)
+      await deleteItem(action.payload)
         .then((response) => console.log("delete successful"))
         .catch((err) => console.log("There was an error", err));
     })();
